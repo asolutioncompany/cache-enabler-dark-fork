@@ -1,8 +1,8 @@
 === Cache Enabler ===
 Contributors: keycdn
 Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed
-Tested up to: 6.2
-Stable tag: 1.8.13
+Tested up to: 6.8
+Stable tag: 1.8.15
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -54,6 +54,15 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 
 == Changelog ==
+
+= 1.8.15 =
+Support more (html4, xhtml1.0, xhtml1.1) doctypes (thanks @orlitzky)
+Remove all chmod() calls (thanks @orlitzky)
+
+= 1.8.14 =
+* PHP 8.2 compatibility
+* Content negotiation compatibility (thanks @futta)
+* Improved path handling (thanks @orlitzky)
 
 = 1.8.13 =
 * WordPress 6.1 compatibility

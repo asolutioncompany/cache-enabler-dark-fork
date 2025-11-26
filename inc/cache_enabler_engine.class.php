@@ -129,7 +129,7 @@ final class Cache_Enabler_Engine {
      */
     public static function start_buffering() {
 
-        ob_start( 'self::end_buffering' );
+        ob_start( self::class . '::end_buffering' );
     }
 
     /**
@@ -265,12 +265,28 @@ final class Cache_Enabler_Engine {
             return false;
         }
 
-        $has_html_tag       = ( stripos( $contents, '<html' ) !== false );
-        $has_html5_doctype  = preg_match( '/^<!DOCTYPE.+html\s*>/i', ltrim( $contents ) );
-        $has_xsl_stylesheet = ( stripos( $contents, '<xsl:stylesheet' ) !== false || stripos( $contents, '<?xml-stylesheet' ) !== false );
+        # Return true if we have an HTML tag, an "HTML" doctype, and no XSL stylesheet.
+        # The following checks are nested so that if any of them fail, we can return
+        # false immediately without running the others.
+        $has_html_tag = ( stripos( $contents, '<html' ) !== false );
+        if ( $has_html_tag ) {
+            # This "html" regex should match at least html4, html5,
+            # xhtml1.0, and xhtml1.1:
+            #
+            #   https://www.w3.org/QA/2002/04/valid-dtd-list.html
+            #
+            # Note that xhtml can have an <xml ... > tag (with
+            # question marks next to the brackets) before
+            # the doctype.
+            $html_doctype_regex = '/^\s*(<\?xml.+\?>)?\s*<!DOCTYPE\s+html\s*(PUBLIC\s+.+)?>/i';
+            $has_html_doctype   = preg_match( $html_doctype_regex, $contents );
 
-        if ( $has_html_tag && $has_html5_doctype && ! $has_xsl_stylesheet ) {
-            return true;
+            if ( $has_html_doctype ) {
+                $has_xsl_stylesheet = ( stripos( $contents, '<xsl:stylesheet' ) !== false || stripos( $contents, '<?xml-stylesheet' ) !== false );
+                if ( ! $has_xsl_stylesheet ) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -312,9 +328,10 @@ final class Cache_Enabler_Engine {
 
         $bad_request_method = ( ! isset( $_SERVER['REQUEST_METHOD'] ) || $_SERVER['REQUEST_METHOD'] !== 'GET' );
         $bad_response_code  = ( http_response_code() !== 200 );
+        $bad_accept_header  = ( isset( $_SERVER['HTTP_ACCEPT'] ) && false === strpos( $_SERVER['HTTP_ACCEPT'], 'text/html' ) );
         $donotcachepage     = ( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE );
 
-        if ( $bad_request_method || $bad_response_code || $donotcachepage || self::is_wrong_permalink_structure() ) {
+        if ( $bad_request_method || $bad_response_code || $bad_accept_header || $donotcachepage || self::is_wrong_permalink_structure() ) {
             return true;
         }
 
