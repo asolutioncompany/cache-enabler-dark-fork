@@ -136,14 +136,8 @@ final class Cache_Enabler {
             $cookie = $prefix . '-theme';
 
             if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
-                add_filter( 'body_class', function( $classes ) {
-                    $prefix = self::get_prefix();
-
-                    if ( $prefix ) {
-                        return array_merge( $classes, array( $prefix . '-dark-theme' ) );
-                    }
-
-                    return $classes;
+                add_filter( 'body_class', function( $classes ) use ( $prefix ) {
+                    return array_merge( $classes, array( $prefix . '-dark-theme' ) );
                 } );
             }
         }
