@@ -1,8 +1,10 @@
 # Cache Enabler Dark Fork
 
-Adds the capability to create cache versions of multiple themes based on a cookie value.
+Adds the capability to cache light and dark themes based on a cookie value.
 
-Documentation will be added to guide setup since it requires Javascript to add the capability to interactively switch themes.
+The code is being updated to simplify the process of adding the ability to cache light and dark theme for a website.
+
+Documentation will be added to guide setup since it requires Javascript and CSS to complete the configuration.
 
 # Cache Enabler - WordPress Caching Plugin
 
