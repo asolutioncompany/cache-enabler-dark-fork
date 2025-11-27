@@ -118,20 +118,52 @@ final class Cache_Enabler {
             add_action( 'network_admin_notices', array( __CLASS__, 'cache_cleared_notice' ) );
         }
 
+        // Add the dark theme if the dark theme prefix is set
         add_action( 'init', array( __CLASS__, 'setup_theme' ) );
     }
 
+    /**
+     * Setup the Dark Theme
+     *
+     * Get dark theme cookie. If set to the dark theme, add the dark theme class to the body tag.
+     *
+     * @since   1.8.15
+     */
     public static function setup_theme() {
         // Add dark theme to body tag if set
-        if ( isset( Cache_Enabler_Engine::$settings['included_cookie'] ) ) {
-            $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
+        $prefix = self::get_prefix();
+        if ( $prefix ) {
             $cookie = $prefix . '-theme';
+
             if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
                 add_filter( 'body_class', function( $classes ) {
-                    return array_merge( $classes, array( $prefix . '-dark-theme' ) );
+                    $prefix = self::get_prefix();
+
+                    if ( $prefix ) {
+                        return array_merge( $classes, array( $prefix . '-dark-theme' ) );
+                    }
+
+                    return $classes;
                 } );
             }
         }
+    }
+
+    /**
+     * Get Prefix for the Dark Theme
+     *
+     * Get the prefix stored by the user if it is stored.
+     *
+     * @since   1.8.15
+     */
+    public static function get_prefix() {
+        $prefix = '';
+
+        if ( isset( Cache_Enabler_Engine::$settings['included_cookie'] ) ) {
+            $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
+        }
+
+        return $prefix;
     }
 
     /**

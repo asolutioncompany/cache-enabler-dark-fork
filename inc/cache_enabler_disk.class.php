@@ -751,6 +751,7 @@ final class Cache_Enabler_Disk {
             $cache_keys['scheme'] = 'https-';
         }
 
+        // Add the dark or light theme name to the cache file if a prefix is set
         $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
         if ( $prefix ) {
             $cookie = $prefix . '-theme';
