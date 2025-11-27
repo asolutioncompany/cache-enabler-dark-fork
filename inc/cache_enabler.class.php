@@ -117,6 +117,21 @@ final class Cache_Enabler {
             add_action( 'admin_notices', array( __CLASS__, 'cache_cleared_notice' ) );
             add_action( 'network_admin_notices', array( __CLASS__, 'cache_cleared_notice' ) );
         }
+
+        add_action( 'init', array( __CLASS__, 'setup_theme' ) );
+    }
+
+    public static function setup_theme() {
+        // Add dark theme to body tag if set
+        if ( isset( Cache_Enabler_Engine::$settings['included_cookie'] ) ) {
+            $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
+            $cookie = $prefix . '-theme';
+            if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
+                add_filter( 'body_class', function( $classes ) {
+                    return array_merge( $classes, array( $prefix . '-dark-theme' ) );
+                } );
+            }
+        }
     }
 
     /**
@@ -1031,7 +1046,6 @@ final class Cache_Enabler {
             'excluded_query_strings'             => '',
             'excluded_cookies'                   => '',
             'included_cookie'                    => '',
-            'included_cookie_values'             => '',
         );
 
         return $default_user_settings;
@@ -1107,7 +1121,6 @@ final class Cache_Enabler {
             'excl_paths'                             => 'excluded_page_paths',
             'excl_cookies'                           => 'excluded_cookies',
             'incl_cookie'                            => 'included_cookie',
-            'incl_cookie_values'                     => 'included_cookie_values',
             'incl_parameters'                        => '',
 
             // 1.6.0
@@ -2543,7 +2556,6 @@ final class Cache_Enabler {
             'excluded_query_strings'             => (string) self::validate_regex( $settings['excluded_query_strings'] ),
             'excluded_cookies'                   => (string) self::validate_regex( $settings['excluded_cookies'] ),
             'included_cookie'                    => (string) sanitize_text_field( $settings['included_cookie'] ),
-            'included_cookie_values'             => (string) sanitize_text_field( $settings['included_cookie_values'] ),
         ), self::get_default_settings( 'system' ) );
 
         if ( ! empty( $settings['clear_site_cache_on_saved_settings'] ) ) {
@@ -2709,22 +2721,14 @@ final class Cache_Enabler {
 
                                 <br />
 
-                                <p class="subheading"><?php esc_html_e( 'Cookie Cache', 'cache-enabler' ); ?></p>
+                                <p class="subheading"><?php esc_html_e( 'Dark and Light Cache', 'cache-enabler' ); ?></p>
 
                                 <label for="cache_enabler_included_cookie">
                                     <input name="cache_enabler[included_cookie]" type="text" id="cache_enabler_included_cookie" value="<?php echo esc_attr( Cache_Enabler_Engine::$settings['included_cookie'] ) ?>" class="regular-text code" />
-                                    <p class="description"><?php esc_html_e( 'Specify a cookie name to create an extra cache for that cookie.', 'cache-enabler' ); ?></p>
-                                    <p><?php esc_html_e( 'Example:', 'cache-enabler-theme' ); ?> <code class="code--form-control">my-theme</code></p>
+                                    <p class="description"><?php esc_html_e( 'Specify a prefix to setup dark and light themes.', 'cache-enabler' ); ?></p>
+                                    <p><?php esc_html_e( 'Example:', 'my' ); ?> <code class="code--form-control">my</code></p>
                                 </label>
-
-                                <br />
-
-                                <label for="cache_enabler_included_cookie_values">
-                                    <input name="cache_enabler[included_cookie_values]" type="text" id="cache_enabler_included_cookie_values" value="<?php echo esc_attr( Cache_Enabler_Engine::$settings['included_cookie_values'] ) ?>" class="regular-text code" />
-                                    <p class="description"><?php esc_html_e( 'Specify valid cookie values delimited by commas as URL friendly slugs to create an extra cache for those cookie values.', 'cache-enabler' ); ?></p>
-                                    <p><?php esc_html_e( 'Example:', 'cache-enabler' ); ?> <code class="code--form-control">bright-theme, dark-theme</code></p>
-                                </label>
-                            </fieldset>
+                           </fieldset>
                         </td>
                     </tr>
 

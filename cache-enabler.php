@@ -1,13 +1,15 @@
 <?php
 /*
-Plugin Name: Cache Enabler
-Text Domain: cache-enabler
-Description: Simple and fast WordPress caching plugin.
-Author: KeyCDN
-Author URI: https://www.keycdn.com
-License: GPLv2 or later
-Version: 1.8.15
-*/
+ * Plugin Name: Cache Enabler (Dark Fork)
+ * Text Domain: cache-enabler-dark-fork
+ * Description: Simple and fast WordPress caching plugin with features to cache light and dark themes.
+ * Author: aSolution.company
+ * Author URI: https://asolution.company
+ * License: GPLv2 or later
+ * Version: 1.8.15
+ *
+ * Forked from KeyCDN Cache Enabler
+ */
 
 /*
 Copyright (C) 2024 KeyCDN

@@ -751,24 +751,15 @@ final class Cache_Enabler_Disk {
             $cache_keys['scheme'] = 'https-';
         }
 
-        $cookie = Cache_Enabler_Engine::$settings['included_cookie'];
-        if ( $cookie ) {
+        $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
+        if ( $prefix ) {
+            $cookie = $prefix . '-theme';
             if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
-                $cookie_value = trim( $_COOKIE[$cookie] );
-
-                $cookie_values = Cache_Enabler_Engine::$settings['included_cookie_values'];
-                $tmp_cookie_values_array = explode( ',', $cookie_values );
-
-                // trim values
-                $valid_cookie_values_array = array();
-                foreach ( $tmp_cookie_values_array as $tmp_cookie_value ) {
-                    if ( $tmp_cookie_value ) {
-                        $valid_cookie_values_array[] = trim( $tmp_cookie_value );
-                    }
-                }
-
-                if ( in_array( $cookie_value, $valid_cookie_values_array ) ) {
-                    $cache_keys['cookie'] = '-cookie' . '-' . $cookie_value;
+                $cookie_value = intval( $_COOKIE[$cookie] );
+                if ( $cookie_value ) {
+                    $cache_keys['cookie'] = '-cookie' . '-dark';
+                } else {
+                    $cache_keys['cookie'] = '-cookie' . '-light';
                 }
             }
         }
