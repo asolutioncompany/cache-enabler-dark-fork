@@ -175,14 +175,27 @@ Code is encapsulated in the example, but prefixes are added for clarity and if y
 The light theme is the default CSS being used by Cache Enabler. Add CSS to change the default CSS for the dark theme when the user enables the dark theme. You will likely need to adjust colors to several selectors. I have provided a brief example of this step and added an example of how to swap light and dark logos.
 
 ``` css
+/*
+ * Adjust and add your own CSS to complete your dark theme.
+ *
+ * Use "my-dark-theme" as the selector for the dark theme, adjusting the "my" prefix set in Cache Enabler.
+ */
+
+/* Example to change the default website colors for the dark theme */
 body.my-dark-theme {
     background-color: #121212;
     color: #f7f7f7;
 }
+
+
+/* Example to change colors for a section of the dark theme */
 body.my-dark-theme article {
     background-color: #232323;
     color: #f7f7f7;
 }
+
+
+/* Example to swap a default logo for a dark themed logo */
 .my-dark-logo {
     display: none;
 }
