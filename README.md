@@ -10,7 +10,9 @@ Follow the setup guide to create your own UX for allowing users to switch themes
 
 Add a div tag to your website to allow the user to switch themes. This div tag is referred to as a toggle in this guide.
 
-Use the prefix configured in Cache Enabler to prevent naming conflicts. The example prefix of "my" provided in Cache Enabler is being used for this guide. Do not change "selected-theme" since it is used by Cache Enabler.
+Use the prefix configured in Cache Enabler to prevent naming conflicts. The example prefix of "my" provided in Cache Enabler is being used for this guide.
+
+Do not change "selected-theme" since it is used by Cache Enabler.
 
 Do not add any inner HTML to this tag since Javascript will update the value and may cause flicker.
 
@@ -19,9 +21,11 @@ Do not add any inner HTML to this tag since Javascript will update the value and
 <div class="my-selected-theme"></div> <!-- Do not add any inner HTML to this tag. -->
 ```
 
-Add CSS to your website to mark up your link or button. Basics of hover and click effects are added to get you started.
+Add CSS to your website to mark up the toggle added. Basics of hover and click effects are added to get you started.
 
-Use the prefix configured in Cache Enabler to prevent naming conflicts. The example prefix of "my" provided in Cache Enabler is being used for this guide. Do not change "selected-theme" since it is used by Cache Enabler.
+Use the prefix configured in Cache Enabler to prevent naming conflicts. The example prefix of "my" provided in Cache Enabler is being used for this guide.
+
+Do not change "selected-theme" since it is used by Cache Enabler.
 
 ``` css
 .my-selected-theme { /* Adjust the my prefix and properties as needed */
@@ -35,7 +39,9 @@ Use the prefix configured in Cache Enabler to prevent naming conflicts. The exam
 
 Add Javascript to your website to change and set the cookie value. You should not need to change anything except the prefix if you set a different prefix in Cache Enabler.
 
-You will need to set cedf_prefix to the prefix you set in Cache Enabler. You may also customize the text of the button. You should not adjust other constants and code since it Cache Enabler expects the names and values used and to simplify configuration.
+You may also customize the text of the toggle.
+
+You should not adjust other constants and code since it Cache Enabler expects the names and values used and to simplify configuration.
 
 Code is encapsulated in the example, but prefixes are added for clarity and if you decide not to encapsulate your Javascript.
 
