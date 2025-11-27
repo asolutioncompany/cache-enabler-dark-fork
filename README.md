@@ -41,7 +41,7 @@ Add Javascript to your website to change and set the cookie value. You should no
 
 You may also customize the text of the toggle.
 
-You should not adjust other constants and code since it Cache Enabler expects the names and values used and to simplify configuration.
+You should not adjust other constants and code since Cache Enabler expects the names and values used to simplify configuration.
 
 Code is encapsulated in the example, but prefixes are added for clarity and if you decide not to encapsulate your Javascript.
 
@@ -59,14 +59,14 @@ Code is encapsulated in the example, but prefixes are added for clarity and if y
     /*
      * Text of the toggle added to the website to show the selected theme as the light theme.
      *
-     * You may wish to edit the text.
+     * You may freely edit the text.
      */
     const cedf_light_theme_text = 'Light Mode';
 
     /*
      * Text of the toggle added to the website to show the selected theme as the dark theme.
      *
-     * You may wish to edit the text.
+     * You may freely edit the text.
      */
     const cedf_dark_theme_text = 'Dark Mode';
 
