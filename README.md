@@ -108,6 +108,8 @@ body.cedf-dark-theme .my-dark-logo {
 
 ```
 
+### Testing and Troubleshooting
+
 Test and make sure Cache Enabler is creating a cache for both themes by examining the wp-content/cache/cache-enabler directory.
 
 If it isn't creating a cache for both themes, make sure the cookie is being set correctly, clear your cookies for your staging website, check your CSS, and make sure you don't have the original KeyCDN Cache Enabler plugin installed.
