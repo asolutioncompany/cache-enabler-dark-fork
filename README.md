@@ -6,15 +6,17 @@ This plugin has been updated to significantly simplify the process of adding the
  
 It is still undergoing refinement and review until it is ready for production use.
 
-This plugin is not affiliated with KeyCDN.
+The next major tasks before production release is to allow the user to customize the front-end text values for the toggle, complete documentation for production release, perform testing, and perform final code and documentation review.
 
-Visit the KeyCDN Cache Enabler plugin page on WordPress or its Github repository for more information about the original plugin.
+*This plugin is not affiliated with KeyCDN.*
 
-https://wordpress.org/plugins/cache-enabler/
+*Visit the KeyCDN Cache Enabler plugin page on WordPress or its Github repository for more information about the original plugin.*
 
-https://github.com/keycdn/cache-enabler
+*https://wordpress.org/plugins/cache-enabler/*
 
-# Setup Guide to Cache Dark and Light Themes
+*https://github.com/keycdn/cache-enabler*
+
+## Setup Guide to Cache Dark and Light Themes
 
 A lot of steps in setting up Dark and Light themes are done for you.
 
@@ -28,7 +30,7 @@ A lot of steps in setting up Dark and Light themes are done for you.
 
 - It does all of this while creating a cache for both themes.
 
-## Activate and configure Cache Enabler Dark Fork
+### Activate and configure Cache Enabler Dark Fork
 
 Make sure you deactivate previous installations of caching plugins.
 
@@ -38,9 +40,9 @@ Configure Cache Enabler following the original Cache Enabler documentation.
 
 Check the "Enable Light and Dark Theme Caching" option.
 
-## Add toggle to your website with HTML
+### Add toggle to your website with HTML
 
-Add a div tag to your website to allow the user to switch themes. This div tag is referred to as a toggle in this guide.
+Add a `<div>` tag to your website to allow the user to switch themes. This `<div>` tag is referred to as a toggle in this guide.
 
 Do not change the "cedf-selected-theme" class name since it is used by Cache Enabler.
 
@@ -51,7 +53,7 @@ Do not add any inner HTML to this tag since Javascript will update the value and
 <div class="cedf-selected-theme"></div> <!-- Do not add any inner HTML to this tag. -->
 ```
 
-## Markup the toggle with CSS
+### Markup the toggle with CSS
 
 Add CSS to your website to mark up the toggle added. Basic hover and click effects are added to get you started.
 
@@ -66,7 +68,7 @@ Do not change the "cedf-selected-theme" class name since it is used by Cache Ena
     opacity: 0.7;
 }
 ```
-## Markup your new dark theme with CSS
+### Markup your new dark theme with CSS
 
 The light theme is the default CSS being used by Cache Enabler. Add CSS to change the default CSS for the dark theme when the user enables the dark theme. You will likely need to adjust colors to several selectors. I have provided a brief example of this step and added an example of how to swap light and dark logos.
 
