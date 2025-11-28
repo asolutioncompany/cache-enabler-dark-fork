@@ -11,6 +11,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Cache_Enabler {
     /**
+     * Prefix used for dark theme caching.
+     *
+     * @since  1.8.15
+     */
+    const DARK_THEME_PREFIX = 'cedf';
+
+    /**
+     * Cookie value for light theme.
+     *
+     * @since  1.8.15
+     */
+    const DARK_THEME_COOKIE_LIGHT = 0;
+
+    /**
+     * Cookie value for dark theme.
+     *
+     * @since  1.8.15
+     */
+    const DARK_THEME_COOKIE_DARK = 1;
+
+    /**
      * Initialize the plugin.
      *
      * @since  1.5.0
@@ -118,8 +139,9 @@ final class Cache_Enabler {
             add_action( 'network_admin_notices', array( __CLASS__, 'cache_cleared_notice' ) );
         }
 
-        // Add the dark theme if the dark theme prefix is set
+        // Add the dark theme if light and dark theme caching is enabled
         add_action( 'init', array( __CLASS__, 'setup_theme' ) );
+        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_dark_fork_script' ) );
     }
 
     /**
@@ -127,37 +149,51 @@ final class Cache_Enabler {
      *
      * Get dark theme cookie. If set to the dark theme, add the dark theme class to the body tag.
      *
+     * Edge case: If the cookie is missing, empty, or has an invalid value, the light theme is used
+     * by default (no dark theme class is added to the body tag).
+     *
      * @since   1.8.15
      */
     public static function setup_theme() {
-        // Add dark theme to body tag if set
-        $prefix = self::get_prefix();
-        if ( $prefix ) {
-            $cookie = $prefix . '-theme';
+        // Check if dark and light theme caching is enabled
+        if ( empty( Cache_Enabler_Engine::$settings['enable_light_dark_theme'] ) ) {
+            return;
+        }
 
-            if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
-                add_filter( 'body_class', function( $classes ) use ( $prefix ) {
-                    return array_merge( $classes, array( $prefix . '-dark-theme' ) );
+        $cookie_name = Cache_Enabler::DARK_THEME_PREFIX . '-theme';
+        $cookie_value = isset( $_COOKIE[$cookie_name] ) ? $_COOKIE[$cookie_name] : '';
+        
+        // Sanitize cookie value by converting it to an intval.
+        // Edge case: If cookie is invalid, default to light theme
+        if ( $cookie_value ) {
+            $cookie_int_value = intval( $cookie_value );
+
+            // Add dark theme class to the body tag if the cookie is set to the dark theme
+            if ( $cookie_int_value === self::DARK_THEME_COOKIE_DARK ) {
+                add_filter( 'body_class', function( $classes ) {
+                    return array_merge( $classes, array( self::DARK_THEME_PREFIX . '-dark-theme' ) );
                 } );
             }
         }
     }
 
     /**
-     * Get Prefix for the Dark Theme
+     * Enqueue the Dark Fork JavaScript file
      *
-     * Get the prefix stored by the user if it is stored.
+     * Enqueue the dark-fork.js file on the frontend if light and dark theme caching is enabled.
      *
      * @since   1.8.15
      */
-    public static function get_prefix() {
-        $prefix = '';
-
-        if ( isset( Cache_Enabler_Engine::$settings['included_cookie'] ) ) {
-            $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
+    public static function enqueue_dark_fork_script() {
+        if ( ! empty( Cache_Enabler_Engine::$settings['enable_light_dark_theme'] ) ) {
+            wp_enqueue_script(
+                'cache-enabler-dark-fork',
+                plugins_url( 'js/dark-fork.js', CACHE_ENABLER_FILE ),
+                array(),
+                CACHE_ENABLER_VERSION,
+                true
+            );
         }
-
-        return $prefix;
     }
 
     /**
@@ -1071,7 +1107,7 @@ final class Cache_Enabler {
             'excluded_page_paths'                => '',
             'excluded_query_strings'             => '',
             'excluded_cookies'                   => '',
-            'included_cookie'                    => '',
+            'enable_light_dark_theme'            => 0,
         );
 
         return $default_user_settings;
@@ -1146,7 +1182,7 @@ final class Cache_Enabler {
             'excl_ids'                               => 'excluded_post_ids',
             'excl_paths'                             => 'excluded_page_paths',
             'excl_cookies'                           => 'excluded_cookies',
-            'incl_cookie'                            => 'included_cookie',
+            'enable_light_dark_theme'                => 'enable_light_dark_theme',
             'incl_parameters'                        => '',
 
             // 1.6.0
@@ -2581,7 +2617,7 @@ final class Cache_Enabler {
             'excluded_page_paths'                => (string) self::validate_regex( $settings['excluded_page_paths'] ),
             'excluded_query_strings'             => (string) self::validate_regex( $settings['excluded_query_strings'] ),
             'excluded_cookies'                   => (string) self::validate_regex( $settings['excluded_cookies'] ),
-            'included_cookie'                    => (string) sanitize_text_field( $settings['included_cookie'] ),
+            'enable_light_dark_theme'            => (int) ( ! empty( $settings['enable_light_dark_theme'] ) ),
         ), self::get_default_settings( 'system' ) );
 
         if ( ! empty( $settings['clear_site_cache_on_saved_settings'] ) ) {
@@ -2748,12 +2784,11 @@ final class Cache_Enabler {
                                 <br />
 
                                 <p class="subheading"><?php esc_html_e( 'Dark and Light Cache', 'cache-enabler' ); ?></p>
-
-                                <label for="cache_enabler_included_cookie">
-                                    <input name="cache_enabler[included_cookie]" type="text" id="cache_enabler_included_cookie" value="<?php echo esc_attr( Cache_Enabler_Engine::$settings['included_cookie'] ) ?>" class="regular-text code" />
-                                    <p class="description"><?php esc_html_e( 'Specify a prefix to setup dark and light themes.', 'cache-enabler' ); ?></p>
-                                    <p><?php esc_html_e( 'Example:', 'my' ); ?> <code class="code--form-control">my</code></p>
+                                <label for="cache_enabler_enable_light_dark_theme" class="checkbox--form-control">
+                                    <input name="cache_enabler[enable_light_dark_theme]" type="checkbox" id="cache_enabler_enable_light_dark_theme" value="1" <?php checked( '1', Cache_Enabler_Engine::$settings['enable_light_dark_theme'] ); ?> />
+                                    <?php esc_html_e( 'Enable light and dark theme caching', 'cache-enabler' ); ?>
                                 </label>
+                                <p class="description"><?php esc_html_e( 'Enable this option to cache separate versions of your site for light and dark themes based on user preference.', 'cache-enabler' ); ?></p>
                            </fieldset>
                         </td>
                     </tr>

@@ -751,13 +751,16 @@ final class Cache_Enabler_Disk {
             $cache_keys['scheme'] = 'https-';
         }
 
-        // Add the dark or light theme name to the cache file if a prefix is set
-        $prefix = Cache_Enabler_Engine::$settings['included_cookie'];
-        if ( $prefix ) {
-            $cookie = $prefix . '-theme';
-            if ( ! empty( $_COOKIE[$cookie] ) && $_COOKIE[$cookie] ) {
-                $cookie_value = intval( $_COOKIE[$cookie] );
-                if ( $cookie_value ) {
+        // Add the dark or light theme name to the cache file if light and dark theme caching is enabled
+        if ( ! empty( Cache_Enabler_Engine::$settings['enable_light_dark_theme'] ) ) {
+            $cookie_name = Cache_Enabler::DARK_THEME_PREFIX . '-theme';
+            $cookie_value = isset( $_COOKIE[$cookie_name] ) ? $_COOKIE[$cookie_name] : '';
+            
+            // Sanitize cookie value by converting it to an intval.
+            // Edge case: If cookie is invalid, default to light theme
+            if ( $cookie_value ) {
+                $cookie_int_value = intval( $cookie_value );
+                if ( $cookie_int_value === Cache_Enabler::DARK_THEME_COOKIE_DARK ) {
                     $cache_keys['cookie'] = '-cookie' . '-dark';
                 } else {
                     $cache_keys['cookie'] = '-cookie' . '-light';
