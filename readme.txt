@@ -1,23 +1,38 @@
-=== Cache Enabler ===
+=== Cache Enabler Dark Fork ===
 Contributors: keycdn
-Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed
-Tested up to: 6.8
-Stable tag: 1.8.15
+Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed, dark-mode, light-mode, theme
+Tested up to: 6.8.3
+Stable tag: 1.8.15-fork.1
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-A lightweight caching plugin for WordPress that makes your website faster by generating static HTML files.
+A lightweight caching plugin for WordPress that makes your website faster by generating static HTML files. This fork adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
 
 
 == Description ==
+Cache Enabler Dark Fork is a fork of the KeyCDN Cache Enabler plugin that adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
+
 Cache Enabler is a simple, yet powerful WordPress caching plugin that is easy to use, needs minimal configuration, and best of all helps improve site performance for a faster load time. It creates static HTML files of frontend pages and stores them on the server's disk. This allows the static HTML files to be delivered instead of generating pages on the fly, avoiding resource intensive backend processes from the WordPress core, plugins, and database.
+
+This fork extends Cache Enabler with the following features:
+
+* **Light and Dark Theme Caching**: Automatically creates separate cache files for light and dark themes
+* **Theme Toggle Shortcode**: Easy-to-use shortcode `[cedf_theme_toggle]` to add a theme toggle button to your site
+* **Customizable Toggle Text**: Configure the text displayed on the toggle button from the settings page
+* **Customizable Default Theme**: Configure whether light or dark theme is the default for new visitors (server-side, no flicker)
+
+*This plugin is not affiliated with KeyCDN.*
 
 
 = Features =
 * Fast and efficient cache engine
+* **Light and dark theme caching** (fork feature)
+* **Theme toggle shortcode** (fork feature)
+* **Customizable toggle text** (fork feature)
+* **Customizable default theme** (fork feature)
 * Automatic smart cache clearing
 * Manual cache clearing
 * WP-CLI cache clearing
@@ -30,6 +45,10 @@ Cache Enabler is a simple, yet powerful WordPress caching plugin that is easy to
 * Custom post type support
 * `304 Not Modified` support
 * Works perfectly with [Autoptimize](https://wordpress.org/plugins/autoptimize/)
+
+
+== How does the theme caching work? ==
+Cache Enabler sets adds a class to the body tag to identify if the page is the light theme or dark theme. The theme is determined from cookie if set or from the default configured theme if a cookie value is not set. Cache Enabler also adds a toggle for the user to change the theme with a shortcode you can place anywhere. When the user changes the theme, a cookie value is set where the website will always load the selected theme until changed again by the user. Cache Enabler's caching engine will save both themes to the cache so both themes can be cached. All you need to do to setup an extra theme is to add CSS to your website for the extra theme and the shortcode for the user to change their preferred theme.
 
 
 = How does the caching work? =
@@ -54,6 +73,17 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 
 == Changelog ==
+
+= 1.8.15-fork.1 =
+* First production release
+* Add light and dark theme caching support
+* Add theme toggle shortcode `[cedf_theme_toggle]`
+* Add customizable toggle text settings (Light Mode Text and Dark Mode Text)
+* Add default theme setting (Light or Dark) for new visitors (server-side, prevents flicker)
+* Add automatic `cedf-light-theme` or `cedf-dark-theme` body class based on active theme (server-side)
+* Add pre-built JavaScript for theme switching and cookie management (toggle button only)
+* Support both CSS patterns (light base with dark override, or dark base with light override)
+* Complete documentation and code review
 
 = 1.8.15 =
 Support more (html4, xhtml1.0, xhtml1.1) doctypes (thanks @orlitzky)

@@ -2,7 +2,8 @@
 /**
  * Class used for handling engine-related operations.
  *
- * @since  1.5.0
+ * @since   1.5.0
+ * @change  1.8.15-fork.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,6 +11,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 final class Cache_Enabler_Engine {
+    /**
+     * Prefix used for theme caching
+     *
+     * @since  1.8.15-fork.1
+     */
+    const THEME_PREFIX = 'cedf';
+
+    /**
+     * Light theme value
+     *
+     * @since  1.8.15-fork.1
+     */
+    const LIGHT_THEME = 0;
+
+    /**
+     * Dark theme value
+     *
+     * @since  1.8.15-fork.1
+     */
+    const DARK_THEME = 1;
+
+    /**
+     * Get the sanitized theme from cookie or the configured default theme.
+     *
+     * If no cookie is set or cookie value is invalid, the configured default theme is returned.
+     *
+     * @since   1.8.15-fork.1
+     *
+     * @return  int  The sanitized cookie value or configured default theme
+     */
+    public static function get_selected_theme() {
+        // Get the default configured theme.
+        $selected_theme = self::LIGHT_THEME;
+        if ( ! empty( self::$settings['default_theme'] ) ) {
+            $selected_theme = (int) self::$settings['default_theme'];
+        }
+
+        // Get the cookie value from the $_COOKIE array.
+        $cookie_name = self::THEME_PREFIX . '-theme';
+        if ( isset( $_COOKIE[$cookie_name] ) ) {
+            // Sanitize the cookie value to an integer
+            $cookie_int_value = intval( $_COOKIE[$cookie_name] );
+
+            // Set the selected theme to the cookie value if it is valid.
+            if ( $cookie_int_value === self::DARK_THEME ) {
+                $selected_theme = self::DARK_THEME;
+            }
+            if ( $cookie_int_value === self::LIGHT_THEME ) {
+                $selected_theme = self::LIGHT_THEME;
+            }
+        }
+
+        return $selected_theme;
+    }
+
     /**
      * Start the cache engine.
      *

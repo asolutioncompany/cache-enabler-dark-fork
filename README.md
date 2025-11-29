@@ -2,11 +2,7 @@
 
 Cache Enabler Dark Fork adds the ability to cache light and dark themes and is a fork of the KeyCDN Cache Enabler plugin.
  
-This plugin has been updated to significantly simplify the process of adding the ability to cache light and dark themes since the original pre-released versions of this plugin.
- 
-It is still undergoing refinement and review until it is ready for production use.
-
-The next major tasks before production release is to allow the user to customize the front-end text values for the toggle, complete documentation for production release, perform testing, and perform final code and documentation review.
+This plugin also significantly simplifies the process of setting up light and dark themes.
 
 *This plugin is not affiliated with KeyCDN.*
 
@@ -18,17 +14,15 @@ The next major tasks before production release is to allow the user to customize
 
 ## Setup Guide to Cache Dark and Light Themes
 
-A lot of steps in setting up Dark and Light themes are done for you.
+A lot of steps in setting up dark and light themes are done for you.
 
-- The WordPress plugin automatically adds the dark theme class to the `<body>` tag on init based on cookie values.
+- The plugin automatically adds the appropriate theme class (`cedf-light-theme` or `cedf-dark-theme`) to the `<body>` tag according to cookie value or the configured default theme.
 
-- Pre-built Javascript automatically sets user preferences with a cookie on their first visit.
+- You can configure a default theme (Light or Dark) that will be used when no cookie is set or if the cookie value is invalid.
 
-- Pre-built Javascript allows the user to toggle settings and change cookie values according to toggle settings.
+- Pre-built Javascript allows the user to toggle between themes and update cookie values accordingly.
 
-- Configuration of prefixed CSS classes are done for you to make it easy to customize your new dark theme with CSS.
-
-- It does all of this while creating a cache for both themes.
+- Configuration of prefixed CSS classes are done for you to make it easy to customize your themes with CSS. Supports both CSS patterns (light base with dark override, or dark base with light override).
 
 ### Activate and configure Cache Enabler Dark Fork
 
@@ -40,60 +34,74 @@ Configure Cache Enabler following the original Cache Enabler documentation.
 
 Check the "Enable Light and Dark Theme Caching" option.
 
-### Add toggle to your website with HTML
+Optionally set the "Default Theme" to "Dark" if you want the dark theme to be the default for new visitors when no cookie is set or cookie value is invalid.
 
-Add a `<div>` tag to your website to allow the user to switch themes. This `<div>` tag is referred to as a toggle in this guide.
+Optionally customize the "Light Mode Text" and "Dark Mode Text" fields to change the text displayed on the toggle button.
 
-Do not change the "cedf-selected-theme" class name since it is used by Cache Enabler.
+### Add the toggle to your website with a shortcode
 
-Do not add any inner HTML to this tag since Javascript will update the value and may cause flicker. There will still be a delay before it is shown as Javascript checks for a cookie and setups a cookie based on user preferences if not yet created.
+Add the `[cedf_theme_toggle]` shortcode to your website to allow the user to switch themes. This shortcode is referred to as a toggle in this guide.
 
 ``` html
-<!-- Do not change the class name since it is used by Cache Enabler -->
-<div class="cedf-selected-theme"></div> <!-- Do not add any inner HTML to this tag. -->
+[cedf_theme_toggle]
 ```
 
 ### Markup the toggle with CSS
 
-Add CSS to your website to mark up the toggle added. Basic hover and click effects are added to get you started.
+The shortcode creates the following `<div>` tag with the text configured in the Cache Enabler settings. You should not add the HTML directly since it is dynamically generated based on user preferences.
 
-Do not change the "cedf-selected-theme" class name since it is used by Cache Enabler.
+``` html
+<div class="cedf-theme-toggle">Light Mode</div>
+```
+
+Add CSS to your website to mark up the toggle added. Basic colors, hover effects, and click effects are added to get you started.
 
 ``` css
-.cedf-selected-theme { /* Do not change the class name since it is used by Cache Enabler */
+.cedf-theme-toggle {
     cursor: pointer;
+    background-color: #fff;
+    color: #121212;
 }
-.cedf-selected-theme:hover,
-.cedf-selected-theme:active { /* Do not change the class name since it is used by Cache Enabler */
+.cedf-theme-toggle:hover,
+.cedf-theme-toggle:active {
     opacity: 0.7;
 }
 ```
-### Markup your new dark theme with CSS
+### Markup your themes with CSS
 
-The light theme is the default CSS being used by Cache Enabler. Add CSS to change the default CSS for the dark theme when the user enables the dark theme. You will likely need to adjust colors to several selectors. I have provided a brief example of this step and added an example of how to swap light and dark logos.
+The plugin adds either `cedf-light-theme` or `cedf-dark-theme` class to the body tag based on the user's preference. You can use either CSS pattern:
+
+**Pattern A: Light theme as base (default)**
+- Your base CSS defines the light theme
+- Add `.cedf-dark-theme` selectors to override for dark theme
+
+**Pattern B: Dark theme as base**
+- Your base CSS defines the dark theme  
+- Add `.cedf-light-theme` selectors to override for light theme
+
+#### Pattern A Example: Light theme as base
 
 ``` css
 /*
- * Adjust and add your own CSS to complete your dark theme.
+ * Pattern A: Light theme as base, dark theme as override
  *
- * Use "cedf-dark-theme" as the selector for the dark theme.
- *
- * Do not change this class name since it is used by Cache Enabler.
+ * Base CSS defines the light theme (no class needed)
+ * Use "cedf-dark-theme" as the selector for dark theme overrides.
  */
 
-/* Example to change the default website colors for the dark theme */
-body.cedf-dark-theme {
+/* Base CSS - light theme */
+body {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+/* Dark theme overrides */
+body.cedf-dark-theme,
+body.cedf-dark-theme article,
+body.cedf-dark-theme .cedf-theme-toggle {
     background-color: #121212;
     color: #f7f7f7;
 }
-
-
-/* Example to change colors for a section of the dark theme */
-body.cedf-dark-theme article {
-    background-color: #232323;
-    color: #f7f7f7;
-}
-
 
 /* Example to swap a default logo for a dark themed logo */
 .my-dark-logo {
@@ -105,7 +113,42 @@ body.cedf-dark-theme .my-light-logo {
 body.cedf-dark-theme .my-dark-logo {
     display: block;
 }
+```
 
+#### Pattern B Example: Dark theme as base
+
+``` css
+/*
+ * Pattern B: Dark theme as base, light theme as override
+ *
+ * Base CSS defines the dark theme (no class needed)
+ * Use "cedf-light-theme" as the selector for light theme overrides.
+ */
+
+/* Base CSS - dark theme */
+body {
+    background-color: #121212;
+    color: #f7f7f7;
+}
+
+/* Light theme overrides */
+body.cedf-light-theme,
+body.cedf-light-theme article,
+body.cedf-light-theme .cedf-theme-toggle {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+/* Example to swap a default logo for a light themed logo */
+.my-light-logo {
+    display: none;
+}
+body.cedf-light-theme .my-dark-logo {
+    display: none;
+}
+body.cedf-light-theme .my-light-logo {
+    display: block;
+}
 ```
 
 ### Testing and Troubleshooting
@@ -113,3 +156,5 @@ body.cedf-dark-theme .my-dark-logo {
 Test and make sure Cache Enabler is creating a cache for both themes by examining the wp-content/cache/cache-enabler directory.
 
 If it isn't creating a cache for both themes, make sure the cookie is being set correctly, clear your cookies for your staging website, check your CSS, and make sure you don't have the original KeyCDN Cache Enabler plugin installed.
+
+Thoroughly test pages, posts, and archives to make sure you have configured all the necessary markup for both light and dark themes.
