@@ -6,7 +6,7 @@
  * Author: aSolution.company
  * Author URI: https://asolution.company
  * License: GPLv2 or later
- * Version: 1.8.15-fork.1
+ * Version: 1.8.15-fork.1-beta
  * 
  * Cache Enabler Dark Fork adds the ability to cache light and dark themes and is a fork of the KeyCDN 
  * Cache Enabler plugin.
