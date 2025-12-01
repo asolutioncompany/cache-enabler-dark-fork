@@ -3,7 +3,7 @@
  * Class used for handling engine-related operations.
  *
  * @since   1.5.0
- * @change  1.8.15-fork.1
+ * @change  1.8.15-fork.1-beta
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,21 +14,21 @@ final class Cache_Enabler_Engine {
     /**
      * Prefix used for theme caching
      *
-     * @since  1.8.15-fork.1
+     * @since  1.8.15-fork.1-beta
      */
     const THEME_PREFIX = 'cedf';
 
     /**
      * Light theme value
      *
-     * @since  1.8.15-fork.1
+     * @since  1.8.15-fork.1-beta
      */
     const LIGHT_THEME = 0;
 
     /**
      * Dark theme value
      *
-     * @since  1.8.15-fork.1
+     * @since  1.8.15-fork.1-beta
      */
     const DARK_THEME = 1;
 
@@ -37,7 +37,7 @@ final class Cache_Enabler_Engine {
      *
      * If no cookie is set or cookie value is invalid, the configured default theme is returned.
      *
-     * @since   1.8.15-fork.1
+     * @since   1.8.15-fork.1-beta
      *
      * @return  int  The sanitized cookie value or configured default theme
      */

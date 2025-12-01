@@ -43,7 +43,7 @@ final class Cache_Enabler {
      *
      * @since   1.0.0
      * @change  1.8.0
-     * @change  1.8.15-fork.1
+     * @change  1.8.15-fork.1-beta
      */
     public function __construct() {
 
@@ -130,7 +130,7 @@ final class Cache_Enabler {
      *
      * Get the theme and add the appropriate theme class to the body tag.
      *
-     * @since   1.8.15-fork.1
+     * @since   1.8.15-fork.1-beta
      */
     public static function setup_theme() {
         // Check if theme caching is enabled
@@ -159,7 +159,7 @@ final class Cache_Enabler {
      *
      * Generates a div with the theme toggle that displays "Light Mode" or "Dark Mode".
      *
-     * @since   1.8.15-fork.1
+     * @since   1.8.15-fork.1-beta
      *
      * @return  string  HTML div element with the theme toggle text
      */
@@ -183,7 +183,7 @@ final class Cache_Enabler {
      *
      * Enqueue the dark-fork.js file on the frontend if theme caching is enabled.
      *
-     * @since   1.8.15-fork.1
+     * @since   1.8.15-fork.1-beta
      */
     public static function enqueue_dark_fork_script() {
         if ( empty( Cache_Enabler_Engine::$settings['enable_theme'] ) ) {
@@ -1098,7 +1098,7 @@ final class Cache_Enabler {
      * Get the default plugin user settings.
      *
      * @since  1.8.6
-     * @change 1.8.15-fork.1
+     * @change 1.8.15-fork.1-beta
      *
      * @return  array  Default plugin user settings.
      */
@@ -2595,7 +2595,7 @@ final class Cache_Enabler {
      *
      * @since   1.0.0
      * @change  1.8.6
-     * @change  1.8.15-fork.1
+     * @change  1.8.15-fork.1-beta
      *
      * @param   array  $settings  Plugin settings.
      * @return  array             Validated plugin settings.
@@ -2653,7 +2653,7 @@ final class Cache_Enabler {
      *
      * @since   1.0.0
      * @change  1.8.0
-     * @change  1.8.15-fork.1
+     * @change  1.8.15-fork.1-beta
      */
     public static function settings_page() {
 

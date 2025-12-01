@@ -728,7 +728,7 @@ final class Cache_Enabler_Disk {
      *
      * @since   1.7.0
      * @change  1.8.0
-     * @change  1.8.15-fork.1
+     * @change  1.8.15-fork.1-beta
      *
      * @return  string[]  An array of cache keys with names as the keys and keys as the values.
      */
