@@ -1,33 +1,51 @@
 <?php
-/*
- * Plugin Name: Cache Enabler Dark Fork
- * Text Domain: cache-enabler-dark-fork
- * Description: Lightweight and fast WordPress caching plugin with features to cache light and dark themes.
- * Author: aSolution.company
- * Author URI: https://asolution.company
- * License: GPLv2 or later
- * Version: 1.8.15-fork.1-beta
- * 
- * Cache Enabler Dark Fork adds the ability to cache light and dark themes and is a fork of the KeyCDN 
- * Cache Enabler plugin.
+/**
+ * Cache Enabler Dark Fork
+ *
+ * Cache Enabler Dark Fork is a fork of the KeyCDN Cache Enabler plugin that adds the ability to
+ * cache separate versions of your site for light and dark themes based on user preferences.
+ *
+ * This plugin also significantly simplifies the process of setting up light and dark themes.
+ *
+ * This fork extends Cache Enabler with the following features:
+ *
+ * Light and Dark Theme Caching: Automatically creates separate cache files for light and dark themes
+ * Theme Toggle Shortcode: Easy-to-use shortcode to add a theme toggle button to your site
+ * Customizable Toggle Text: Configure the text displayed on the toggle button from the settings page
+ * Customizable Default Theme: Configure whether light or dark theme is the default for new visitors.
+ *
+ * Visit the Github page for the Setup Guide and more information:
  *
  * https://github.com/asolutioncompany/cache-enabler-dark-fork
- *    
+ *
  * Forked from KeyCDN Cache Enabler v 1.8.15
- * 
- * The original KeyCDN Cache Enabler plugin provides a lightweight page caching plugin for WordPress that 
- * makes your website faster by generating static HTML files. 
- * 
- * It is quick and easy to setup and use and plays well with other performance enhancing plugins, 
+ *
+ * The original KeyCDN Cache Enabler plugin provides a lightweight page caching plugin for WordPress that
+ * makes your website faster by generating static HTML files.
+ *
+ * It is quick and easy to setup and use and plays well with other performance enhancing plugins,
  * such as Autoptimize, without redundancy of functionality.
- * 
+ *
  * The original Cache Enabler plugin is available at:
- * 
+ *
  * https://github.com/keycdn/cache-enabler
- * 
+ *
  * https://wordpress.org/plugins/cache-enabler/
  *
  * This plugin is not affiliated with KeyCDN.
+ *
+ * @wordpress-plugin
+ * Plugin Name: Cache Enabler Dark Fork
+ * Plugin URI: https://github.com/asolutioncompany/cache-enabler-dark-fork
+ * Description: Lightweight and fast WordPress caching plugin with features to cache light and dark themes.
+ * Version: 1.8.15-fork.1-beta
+ * Requires PHP: 8.1
+ * Author: aSolution.company
+ * Author URI: https://asolution.company
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: cache-enabler-dark-fork
+ * Domain Path: /languages
  */
 
 /*
