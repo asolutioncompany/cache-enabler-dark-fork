@@ -9,22 +9,26 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-A lightweight caching plugin for WordPress that makes your website faster by generating static HTML files. This fork adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
-
-
-== Description ==
 Cache Enabler Dark Fork is a fork of the KeyCDN Cache Enabler plugin that adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
 
-Cache Enabler is a simple, yet powerful WordPress caching plugin that is easy to use, needs minimal configuration, and best of all helps improve site performance for a faster load time. It creates static HTML files of frontend pages and stores them on the server's disk. This allows the static HTML files to be delivered instead of generating pages on the fly, avoiding resource intensive backend processes from the WordPress core, plugins, and database.
+This plugin also significantly simplifies the process of setting up light and dark themes.
 
 This fork extends Cache Enabler with the following features:
 
 * **Light and Dark Theme Caching**: Automatically creates separate cache files for light and dark themes
 * **Theme Toggle Shortcode**: Easy-to-use shortcode `[cedf_theme_toggle]` to add a theme toggle button to your site
 * **Customizable Toggle Text**: Configure the text displayed on the toggle button from the settings page
-* **Customizable Default Theme**: Configure whether light or dark theme is the default for new visitors (server-side, no flicker)
+* **Customizable Default Theme**: Configure whether light or dark theme is the default for new visitors
 
 *This plugin is not affiliated with KeyCDN.*
+
+
+== Description ==
+Cache Enabler Dark Fork is a fork of the KeyCDN Cache Enabler plugin that adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
+
+This plugin also significantly simplifies the process of setting up light and dark themes.
+
+Cache Enabler is a simple, yet powerful WordPress caching plugin that is easy to use, needs minimal configuration, and best of all helps improve site performance for a faster load time. It creates static HTML files of frontend pages and stores them on the server's disk. This allows the static HTML files to be delivered instead of generating pages on the fly, avoiding resource intensive backend processes from the WordPress core, plugins, and database.
 
 
 = Features =

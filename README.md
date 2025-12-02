@@ -1,8 +1,15 @@
 # Cache Enabler Dark Fork
 
-Cache Enabler Dark Fork adds the ability to cache light and dark themes and is a fork of the KeyCDN Cache Enabler plugin.
- 
+Cache Enabler Dark Fork is a fork of the KeyCDN Cache Enabler plugin that adds the ability to cache separate versions of your site for light and dark themes based on user preferences.
+
 This plugin also significantly simplifies the process of setting up light and dark themes.
+
+This fork extends Cache Enabler with the following features:
+
+* **Light and Dark Theme Caching**: Automatically creates separate cache files for light and dark themes
+* **Theme Toggle Shortcode**: Easy-to-use shortcode `[cedf_theme_toggle]` to add a theme toggle button to your site
+* **Customizable Toggle Text**: Configure the text displayed on the toggle button from the settings page
+* **Customizable Default Theme**: Configure whether light or dark theme is the default for new visitors
 
 *This plugin is not affiliated with KeyCDN.*
 
