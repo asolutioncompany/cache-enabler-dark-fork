@@ -2809,7 +2809,7 @@ final class Cache_Enabler {
                                     <input name="cache_enabler[enable_theme]" type="checkbox" id="cache_enabler_enable_theme" value="1" <?php checked( '1', Cache_Enabler_Engine::$settings['enable_theme'] ); ?> />
                                     <?php esc_html_e( 'Enable light and dark theme caching', 'cache-enabler' ); ?>
                                 </label>
-                                <p class="description"><?php esc_html_e( 'Enable this option to cache separate versions of your site for light and dark themes based on user preference.', 'cache-enabler' ); ?></p>
+                                <p class="description"><?php esc_html_e( 'Enable this option to cache separate versions of your site for light and dark themes based on user preference. Use the shortcode [cedf_theme_toggle] to add the toggle to your website.', 'cache-enabler' ); ?></p>
 
                                 <br />
 
