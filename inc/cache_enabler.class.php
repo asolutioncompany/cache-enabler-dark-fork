@@ -190,9 +190,12 @@ final class Cache_Enabler {
             return;
         }
 
+        $plugin_url = plugin_dir_url( dirname( __FILE__ ) );
+
+        // Enqueue front JavaScript with jQuery as dependency
         wp_enqueue_script(
             'cache-enabler-dark-fork',
-            plugins_url( 'js/dark-fork.js', CACHE_ENABLER_FILE ),
+            $plugin_url . 'js/dark-fork.js',
             array(),
             CACHE_ENABLER_VERSION,
             true

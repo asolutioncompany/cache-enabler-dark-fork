@@ -2,7 +2,7 @@
 Contributors: keycdn
 Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed, dark-mode, light-mode, theme
 Tested up to: 6.8.3
-Stable tag: 1.8.15-fork.1-beta
+Stable tag: 1.8.15-fork.2-beta
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -77,6 +77,9 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 
 == Changelog ==
+
+= 1.8.15-fork.2-beta =
+* Fix incorrect JavaScript file path in enqueue function
 
 = 1.8.15-fork.1-beta =
 * First production release
