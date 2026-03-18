@@ -1,8 +1,8 @@
 === Cache Enabler Dark Fork ===
 Contributors: keycdn
 Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed, dark-mode, light-mode, theme
-Tested up to: 6.8.3
-Stable tag: 1.8.15-fork.3-beta
+Tested up to: 6.9
+Stable tag: 1.8.16-fork.3-beta
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -78,9 +78,10 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 == Changelog ==
 
-= 1.8.15-fork.3-beta =
-* Fix CSS and JS loading: use actual main plugin file (cache-enabler-dark-fork.php) in constants so plugins_url() resolves correctly on all environments (fixes settings.min.css and dark-fork.js loading as filesystem paths on dev)
-* Enqueue front-end JS with plugins_url( 'js/dark-fork.js', CACHE_ENABLER_FILE ) instead of plugin_dir_url( dirname( __FILE__ ) )
+= 1.8.16-fork.3-beta =
+* Fix possible problems with stale advanced-cached.php after clone
+* Clone should exclude advanced-cache.php
+* Merged upstream which also addresses a stale advanced-cache.php file
 
 = 1.8.15-fork.2-beta =
 * Fix incorrect JavaScript file path in enqueue function
@@ -96,9 +97,17 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 * Support both CSS patterns (light base with dark override, or dark base with light override)
 * Complete documentation and code review
 
+= 1.8.16 =
+* Fix caching logic flaw (thanks @8ctopus)
+* Fix HTML minifier from corrupting JSON scripts (thanks @frappe64)
+* Fix caching takes place in multi-site if plugin is activated on one site (thanks @8ctopus)
+* Improve cache or settings dir may already exist (thanks @8ctopus)
+* Fix delete advanced cache when it is a symbolic link (thanks @8ctopus)
+* Fix advanced cache file may be writable while the directory it is located in may not (thanks @8ctopus)
+
 = 1.8.15 =
-Support more (html4, xhtml1.0, xhtml1.1) doctypes (thanks @orlitzky)
-Remove all chmod() calls (thanks @orlitzky)
+* Support more (html4, xhtml1.0, xhtml1.1) doctypes (thanks @orlitzky)
+* Remove all chmod() calls (thanks @orlitzky)
 
 = 1.8.14 =
 * PHP 8.2 compatibility

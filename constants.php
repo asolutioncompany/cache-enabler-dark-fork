@@ -9,7 +9,7 @@
 // BASE_VERSION: The upstream Cache Enabler version this fork is based on
 // FORK_BUILD: Increment this number for each release of your fork changes
 // VERSION: Combined version in format BASE_VERSION-fork.FORK_BUILD
-$cache_enabler_base_version = '1.8.15';  // Update when merging upstream updates
+$cache_enabler_base_version = '1.8.16';  // Update when merging upstream updates
 $cache_enabler_fork_build   = '3';        // Increment for each fork release
 
 $cache_enabler_constants = array(
