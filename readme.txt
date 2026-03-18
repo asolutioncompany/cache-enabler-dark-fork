@@ -2,7 +2,7 @@
 Contributors: keycdn
 Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed, dark-mode, light-mode, theme
 Tested up to: 6.9
-Stable tag: 1.8.16-fork.3-beta
+Stable tag: 1.8.16-fork.4-beta
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -77,6 +77,9 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 
 == Changelog ==
+
+= 1.8.16-fork.4-beta =
+* Bump base version to 1.8.16, fork build 4
 
 = 1.8.16-fork.3-beta =
 * Fix possible problems with stale advanced-cached.php after clone
