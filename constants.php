@@ -10,7 +10,7 @@
 // FORK_BUILD: Increment this number for each release of your fork changes
 // VERSION: Combined version in format BASE_VERSION-fork.FORK_BUILD
 $cache_enabler_base_version = '1.8.15';  // Update when merging upstream updates
-$cache_enabler_fork_build   = '2';        // Increment for each fork release
+$cache_enabler_fork_build   = '3';        // Increment for each fork release
 
 $cache_enabler_constants = array(
     'CACHE_ENABLER_BASE_VERSION'   => $cache_enabler_base_version,
@@ -19,8 +19,8 @@ $cache_enabler_constants = array(
     'CACHE_ENABLER_MIN_PHP'         => '5.6',
     'CACHE_ENABLER_MIN_WP'          => '5.1',
     'CACHE_ENABLER_DIR'             => __DIR__,
-    'CACHE_ENABLER_FILE'            => __DIR__ . '/cache-enabler.php',
-    'CACHE_ENABLER_BASE'            => ( function_exists( 'wp_normalize_path' ) ) ? plugin_basename( __DIR__ . '/cache-enabler.php' ) : null,
+    'CACHE_ENABLER_FILE'            => __DIR__ . '/cache-enabler-dark-fork.php',
+    'CACHE_ENABLER_BASE'            => ( function_exists( 'wp_normalize_path' ) ) ? plugin_basename( __DIR__ . '/cache-enabler-dark-fork.php' ) : null,
     'CACHE_ENABLER_CACHE_DIR'       => WP_CONTENT_DIR . '/cache/cache-enabler', // Without a trailing slash.
     'CACHE_ENABLER_SETTINGS_DIR'    => WP_CONTENT_DIR . '/settings/cache-enabler', // Without a trailing slash.
     'CACHE_ENABLER_CONSTANTS_FILE'  => __FILE__,

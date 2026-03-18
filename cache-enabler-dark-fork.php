@@ -38,7 +38,7 @@
  * Plugin Name: Cache Enabler Dark Fork
  * Plugin URI: https://github.com/asolutioncompany/cache-enabler-dark-fork
  * Description: Lightweight and fast WordPress caching plugin with features to cache light and dark themes.
- * Version: 1.8.15-fork.2-beta
+ * Version: 1.8.15-fork.3-beta
  * Requires PHP: 8.1
  * Author: aSolution.company
  * Author URI: https://asolution.company

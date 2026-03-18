@@ -2,7 +2,7 @@
 Contributors: keycdn
 Tags: cache, caching, performance, webp, gzip, brotli, mobile, speed, dark-mode, light-mode, theme
 Tested up to: 6.8.3
-Stable tag: 1.8.15-fork.2-beta
+Stable tag: 1.8.15-fork.3-beta
 Requires at least: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -77,6 +77,10 @@ Cache Enabler captures page contents and saves it as a static HTML file on the s
 
 
 == Changelog ==
+
+= 1.8.15-fork.3-beta =
+* Fix CSS and JS loading: use actual main plugin file (cache-enabler-dark-fork.php) in constants so plugins_url() resolves correctly on all environments (fixes settings.min.css and dark-fork.js loading as filesystem paths on dev)
+* Enqueue front-end JS with plugins_url( 'js/dark-fork.js', CACHE_ENABLER_FILE ) instead of plugin_dir_url( dirname( __FILE__ ) )
 
 = 1.8.15-fork.2-beta =
 * Fix incorrect JavaScript file path in enqueue function
